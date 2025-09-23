@@ -51,19 +51,15 @@
           <h3>1) Renda e recursos</h3>
           <div class="group">
             <label for="salario">Salário líquido mensal (R$)</label>
-            <input type="number" id="salario" inputmode="decimal" pattern="[0-9]*[.,]?[0-9]*" value="6150" step="50" min="0" />
+            <input type="number" id="salario" inputmode="decimal" pattern="[0-9]*[.,]?[0-9]*" value="0" step="50" min="0" />
           </div>
           <div class="group">
             <label for="fgts">Valor total de FGTS a utilizar (R$)</label>
             <input type="number" id="fgts" inputmode="decimal" pattern="[0-9]*[.,]?[0-9]*" value="0" step="100" min="0" />
           </div>
           <div class="group">
-            <label for="ganhoCarro">Ganho com venda do carro (R$)</label>
-            <input type="number" id="ganhoCarro" inputmode="decimal" pattern="[0-9]*[.,]?[0-9]*" value="0" step="100" min="0" />
-          </div>
-          <div class="group">
-            <label for="reservas">Reservas em contas (R$) — excluindo FGTS e venda de carro</label>
-            <input type="number" id="reservas" inputmode="decimal" pattern="[0-9]*[.,]?[0-9]*" value="60000" step="100" min="0" />
+            <label for="reservas">Reservas em contas (R$) — excluindo FGTS</label>
+            <input type="number" id="reservas" inputmode="decimal" pattern="[0-9]*[.,]?[0-9]*" value="0" step="100" min="0" />
           </div>
         </div>
 
@@ -72,7 +68,7 @@
           <h3>2) Custos do imóvel</h3>
           <div class="group">
             <label for="valorImovel">Valor do imóvel (R$)</label>
-            <input type="number" id="valorImovel" inputmode="decimal" pattern="[0-9]*[.,]?[0-9]*" value="270000" step="1000" min="0" />
+            <input type="number" id="valorImovel" inputmode="decimal" pattern="[0-9]*[.,]?[0-9]*" value="0" step="1000" min="0" />
           </div>
           <div class="group">
             <label for="entradaTipo">Tipo de entrada</label>
@@ -83,15 +79,15 @@
           </div>
           <div class="group">
             <label for="entradaPercent" id="entradaLabel">Percentual da entrada (%)</label>
-            <input type="number" id="entradaPercent" inputmode="decimal" pattern="[0-9]*[.,]?[0-9]*" value="20" step="1" min="0" max="100" />
+            <input type="number" id="entradaPercent" inputmode="decimal" pattern="[0-9]*[.,]?[0-9]*" value="0" step="1" min="0" max="100" />
           </div>
           <div class="group">
             <label for="prazo">Prazo do financiamento (meses)</label>
-            <input type="number" id="prazo" inputmode="decimal" pattern="[0-9]*[.,]?[0-9]*" value="420" step="10" min="1" />
+            <input type="number" id="prazo" inputmode="decimal" pattern="[0-9]*[.,]?[0-9]*" value="0" step="10" min="1" />
           </div>
           <div class="group">
             <label for="juros">Taxa de juros anual (% a.a.)</label>
-            <input type="number" id="juros" inputmode="decimal" pattern="[0-9]*[.,]?[0-9]*" value="8.16" step="0.01" min="0" />
+            <input type="number" id="juros" inputmode="decimal" pattern="[0-9]*[.,]?[0-9]*" value="0" step="0.01" min="0" />
           </div>
         </div>
 
@@ -100,19 +96,19 @@
           <h3>3) Custos indiretos</h3>
           <div class="group">
             <label for="itbi">Percentual do ITBI (%)</label>
-            <input type="number" id="itbi" inputmode="decimal" pattern="[0-9]*[.,]?[0-9]*" value="2" step="0.1" min="0" />
+            <input type="number" id="itbi" inputmode="decimal" pattern="[0-9]*[.,]?[0-9]*" value="0" step="0.1" min="0" />
           </div>
           <div class="group">
             <label for="escritura">Percentual da escritura (%)</label>
-            <input type="number" id="escritura" inputmode="decimal" pattern="[0-9]*[.,]?[0-9]*" value="1" step="0.1" min="0" />
+            <input type="number" id="escritura" inputmode="decimal" pattern="[0-9]*[.,]?[0-9]*" value="0" step="0.1" min="0" />
           </div>
           <div class="group">
             <label for="registro">Percentual do registro (%)</label>
-            <input type="number" id="registro" inputmode="decimal" pattern="[0-9]*[.,]?[0-9]*" value="1" step="0.1" min="0" />
+            <input type="number" id="registro" inputmode="decimal" pattern="[0-9]*[.,]?[0-9]*" value="0" step="0.1" min="0" />
           </div>
           <div class="group">
             <label for="taxas">Taxas bancárias e laudo (R$)</label>
-            <input type="number" id="taxas" inputmode="decimal" pattern="[0-9]*[.,]?[0-9]*" value="3000" step="100" min="0" />
+            <input type="number" id="taxas" inputmode="decimal" pattern="[0-9]*[.,]?[0-9]*" value="0" step="100" min="0" />
           </div>
         </div>
 
@@ -174,13 +170,13 @@ function handleEntradaTipoChange() {
   
   if (tipo === 'percent') {
     label.textContent = 'Percentual da entrada (%)';
-    input.value = '20';
+    input.value = '0';
     input.step = '1';
     input.min = '0';
     input.max = '100';
   } else {
     label.textContent = 'Valor da entrada (R$)';
-    input.value = '54000';
+    input.value = '0';
     input.step = '1000';
     input.min = '0';
     input.removeAttribute('max');
@@ -208,7 +204,6 @@ function calcular(){
   const norm = v => String(v).replace(',', '.');
   const salario   = parseFloat(norm(document.getElementById('salario').value)||0);
   const fgts      = parseFloat(norm(document.getElementById('fgts').value)||0);
-  const ganho     = parseFloat(norm(document.getElementById('ganhoCarro').value)||0);
   const reservas  = parseFloat(norm(document.getElementById('reservas').value)||0);
 
   const valor     = parseFloat(norm(document.getElementById('valorImovel').value)||0);
@@ -237,7 +232,7 @@ function calcular(){
   const transfer  = itbi + escritura + registro + taxas;
 
   const desembolsoInicialSemExtras = entradaValor + transfer;
-  const recursosTotais    = reservas + fgts + ganho;
+  const recursosTotais    = reservas + fgts;
   const saldoPosCustos    = recursosTotais - reforma - desembolsoInicialSemExtras;
 
   // preencher resultados
@@ -260,10 +255,6 @@ function calcular(){
     <div class="kv-item">
       <div class="kv-label">FGTS disponível</div>
       <div class="kv-value">${fmt(fgts)}</div>
-    </div>
-    <div class="kv-item">
-      <div class="kv-label">Ganho com venda do carro</div>
-      <div class="kv-value">${fmt(ganho)}</div>
     </div>
     <div class="kv-item kv-highlight">
       <div class="kv-label">Total de recursos</div>
